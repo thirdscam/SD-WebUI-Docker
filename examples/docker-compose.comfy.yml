@@ -1,0 +1,20 @@
+version: '3.9'
+services:
+  a1111:
+    container_name: sd-comfy
+    image: 
+    ports:
+      - "7890:7890"
+    volumes:
+      - ./data:/data
+      - ./output:/output
+    stop_signal: SIGINT
+    environment:
+      - CLI_ARGS=--listen --port 7890
+    deploy:
+      resources:
+        reservations:
+          devices:
+              - driver: nvidia
+                device_ids: ['0']
+                capabilities: [gpu,compute,utility]
