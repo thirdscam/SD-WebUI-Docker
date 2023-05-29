@@ -5,7 +5,7 @@ Originally https://github.com/AbdBarho/stable-diffusion-webui-docker
 ## Features
 - Supports latest A1111, Comfy
 - Prebuilt Images
-- Using Latest `torch`
+- Using latest `torch`
 - (A1111 Only) Replace `xformers` to `opt-sdp-no-mem-attention(Torch >= 2.0.0)`
 
 ## Usage
