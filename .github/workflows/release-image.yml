@@ -1,4 +1,4 @@
-name: Publish image
+name: Release image
 
 on:
   release:
@@ -6,8 +6,16 @@ on:
 
 jobs:
   push_to_registries:
-    name: Push image to multiple registries
+    name: Publish image
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - dockerfile: ./a1111/Dockerfile
+            image: ghcr.io/thirdscam/stable-diffusion-webui-a1111
+          - dockerfile: ./comfy/Dockerfile
+            image: ghcr.io/thirdscam/stable-diffusion-webui-comfy
     permissions:
       packages: write
       contents: read
@@ -35,28 +43,15 @@ jobs:
       id: meta
       uses: docker/metadata-action@v4.4.0
       with:
-        images: |
-          thirdscam/stable-diffusion-webui
-          ghcr.io/stable-diffusion-webui
+        images: ${{ matrix.image }}
 
-    - name: Build and push (a1111)
+    - name: Build and push
       uses: docker/build-push-action@v2
       with:
-        context: ./a1111
-        dockerfile: ./comfy/Dockerfile
+        context: .
+        dockerfile: ${{ matrix.dockerfile }}
         push: true
-        tags: a1111-${{ steps.meta.outputs.tags }}
-        labels: ${{ steps.meta.outputs.labels }}
-        cache-from: type=gha
-        cache-to: type=gha,mode=max
-
-    - name: Build and push (comfy)
-      uses: docker/build-push-action@v2
-      with:
-        context: ./comfy
-        dockerfile: ./comfy/Dockerfile
-        push: true
-        tags: comfy-${{ steps.meta.outputs.tags }}
+        tags: ${{ steps.meta.outputs.tags }}
         labels: ${{ steps.meta.outputs.labels }}
         cache-from: type=gha
         cache-to: type=gha,mode=max
