@@ -39,12 +39,24 @@ jobs:
           thirdscam/stable-diffusion-webui
           ghcr.io/stable-diffusion-webui
 
-    - name: Build and push image
+    - name: Build and push (a1111)
       uses: docker/build-push-action@v2
       with:
-        context: .
+        context: ./a1111
+        dockerfile: ./comfy/Dockerfile
         push: true
-        tags: ${{ steps.meta.outputs.tags }}
+        tags: a1111-${{ steps.meta.outputs.tags }}
+        labels: ${{ steps.meta.outputs.labels }}
+        cache-from: type=gha
+        cache-to: type=gha,mode=max
+
+    - name: Build and push (comfy)
+      uses: docker/build-push-action@v2
+      with:
+        context: ./comfy
+        dockerfile: ./comfy/Dockerfile
+        push: true
+        tags: comfy-${{ steps.meta.outputs.tags }}
         labels: ${{ steps.meta.outputs.labels }}
         cache-from: type=gha
         cache-to: type=gha,mode=max
