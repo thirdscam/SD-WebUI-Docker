@@ -63,17 +63,9 @@ services:
 ```yml
 version: '3.9'
 services:
-  # (a1111, comfy) == Default Service Name,
-  # (sd-a1111, sd-comfy) == Container Name.
-  # You can write a name whatever you want.
   a1111:
     container_name: sd-a1111
-    # Image (a1111 or comfy)
     image: ghcr.io/thirdscam/stable-diffusion-webui-a1111:latest
-    # Ports (Default == 7890)
-    # Ports follow the following rules: "External:Internal(Docker Container)"
-    # You can change port number without change CLI_ARGS,
-    # Like This: "8888:7890".
     ports:
       - "7890:7890"
     # Volumes
@@ -83,11 +75,6 @@ services:
     stop_signal: SIGINT
     environment:
       - CLI_ARGS=--listen --port 7890 --enable-insecure-extension-access --api --theme=dark --no-half-vae
-    # If it's a multi-GPU environment,
-    # you can use the GPU with the number you want to use.
-    # Example - device_ids: ['1']
-    # In addition, sd-webui does not support Multi-GPU,
-    # so it is right to assign only one graphics card.
     deploy:
       resources:
         reservations:
@@ -96,6 +83,8 @@ services:
                 device_ids: ['0']
                 capabilities: [gpu,compute,utility]
 
+# Google Drive Mount (using rclone)
+# https://rclone.org/docker/
 volumes:
   mydrive:
     driver: rclone
