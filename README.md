@@ -83,8 +83,11 @@ services:
     stop_signal: SIGINT
     environment:
       - CLI_ARGS=--listen --port 7890 --enable-insecure-extension-access --api --theme=dark --no-half-vae
-    # GPU Setting (For Multi-GPU, etc..)
-    # If you are using only one graphics card, leave it as it is.
+    # If it's a multi-GPU environment,
+    # you can use the GPU with the number you want to use.
+    # Example - device_ids: ['1']
+    # In addition, sd-webui does not support Multi-GPU,
+    # so it is right to assign only one graphics card.
     deploy:
       resources:
         reservations:
