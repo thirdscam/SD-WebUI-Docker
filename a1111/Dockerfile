@@ -55,9 +55,10 @@ ENV LD_PRELOAD=libtcmalloc.so
 RUN --mount=type=cache,target=/root/.cache/pip \
   pip install -U opencv-python-headless scikit-learn send2trash mediapipe ultralytics dynamicprompts[attentiongrabber,magicprompt]
 
-COPY entrypoint.sh /docker/entrypoint.sh
 COPY config.py /docker/config.py
 COPY config.json /docker/config.json
+COPY entrypoint.sh /docker/entrypoint.sh
+RUN chmod +x /docker/entrypoint.sh
 
 RUN \
   mv ${ROOT}/style.css ${ROOT}/user.css && \
