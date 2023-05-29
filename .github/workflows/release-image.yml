@@ -13,8 +13,10 @@ jobs:
       matrix:
         include:
           - dockerfile: ./a1111/Dockerfile
+            context: ./a1111
             image: ghcr.io/thirdscam/stable-diffusion-webui-a1111
           - dockerfile: ./comfy/Dockerfile
+            context: ./comfy
             image: ghcr.io/thirdscam/stable-diffusion-webui-comfy
     permissions:
       packages: write
@@ -48,7 +50,7 @@ jobs:
     - name: Build and push
       uses: docker/build-push-action@v2
       with:
-        context: .
+        context: ${{ matrix.context }}
         file: ${{ matrix.dockerfile }}
         push: true
         tags: ${{ steps.meta.outputs.tags }}
