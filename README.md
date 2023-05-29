@@ -1,6 +1,8 @@
 <h1 align="center">SD WebUI Docker</h1>
 <p align="center">
-  <img alt="Build Status" src="https://github.com/thirdscam/stable-diffusion-webui-docker/actions/workflows/release-image.yml/badge.svg">
+  <a href="https://github.com/thirdscam/stable-diffusion-webui-docker/actions">
+    <img alt="Build Status" src="https://github.com/thirdscam/stable-diffusion-webui-docker/actions/workflows/release-image.yml/badge.svg">
+  </a>
 </p>
 
 Originally https://github.com/AbdBarho/stable-diffusion-webui-docker
