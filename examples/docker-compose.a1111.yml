@@ -2,7 +2,7 @@ version: '3.9'
 services:
   a1111:
     container_name: sd-a1111
-    image: 
+    image: ghcr.io/thirdscam/stable-diffusion-webui-a1111:latest
     ports:
       - "7890:7890"
     volumes:
