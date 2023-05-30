@@ -10,7 +10,24 @@ services:
       - ./output:/output
     stop_signal: SIGINT
     environment:
+      # CLI_ARGS: Command Line Arguments.
+      # https://github.com/comfyanonymous/ComfyUI/blob/master/README.md#features
+      # If you want, you can add other Command Line Arguments by referring to the link above. (--cpu, --lowvram, etc..)
       - CLI_ARGS=--listen --port 7890
+      
+      # APT_ARGS, PIP_ARGS: This is where you write the apt and pip packages to install.
+      # Install some package if you want.
+      - APT_ARGS=
+      # ex) APT_ARGS=package1 package2 ...
+      # equals apt-get install -y package1 package2 ...
+      - PIP_ARGS=
+      # ex) PIP_ARGS=package1 package2 ...
+      # equals pip install package1 package2 ...
+
+      # Tip: If you want to do "pip install -U SomePackage", you can do "-U SomePackage" on the PIP_ARGS.
+      # Like This: PIP_ARGS=-U SomePackage
+      # Same at "--user SomePackage"
+      # PIP_ARGS=--user SomePackage
     deploy:
       resources:
         reservations:

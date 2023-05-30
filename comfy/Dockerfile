@@ -10,8 +10,8 @@ ENV ROOT=/apt
 RUN --mount=type=cache,target=/root/.cache/pip \
   git clone https://github.com/comfyanonymous/ComfyUI.git ${ROOT} && \
   cd ${ROOT} && \
-  pip install -r requirements.txt \
-  pip install -U xformers
+  pip install -r requirements.txt && \
+  pip install --pre xformers
 
 RUN --mount=type=cache,target=/root/.cache/pip  \
   pip install triton
@@ -25,4 +25,7 @@ RUN chmod +x /docker/entrypoint.sh
 ENV NVIDIA_DRIVER_CAPABILITIES=compute,utility NVIDIA_VISIBLE_DEVICES=all
 ENV PYTHONPATH="${PYTHONPATH}:${PWD}" CLI_ARGS=""
 ENTRYPOINT ["/docker/entrypoint.sh"]
-CMD python3 -u main.py ${CLI_ARGS}
+
+CMD test -z "${APT_ARGS}" || apt-get -y install ${APT_ARGS} \
+    && test -z "${PIP_ARGS}" || pip install ${PIP_ARGS} \
+    && python3 -u main.py ${CLI_ARGS}

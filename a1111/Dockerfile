@@ -26,12 +26,13 @@ ENV DEBIAN_FRONTEND=noninteractive PIP_PREFER_BINARY=1
 RUN --mount=type=cache,target=/root/.cache/pip \
   pip install torch torchvision --index-url https://download.pytorch.org/whl/cu118
 
-RUN apt install fonts-dejavu-core rsync git jq moreutils -y && apt-get clean
+RUN apt install fonts-dejavu-core rsync git jq moreutils wget -y && apt-get clean
 
 RUN --mount=type=cache,target=/root/.cache/pip \
   git clone https://github.com/AUTOMATIC1111/stable-diffusion-webui.git apt && \
   cd apt && \
-  pip install -r requirements_versions.txt
+  pip install -r requirements_versions.txt && \
+  pip install --pre xformers
 
 RUN --mount=type=cache,target=/root/.cache/pip \
   pip install triton
@@ -73,8 +74,9 @@ ENTRYPOINT ["/docker/entrypoint.sh"]
 # Cleanup
 RUN cp webui.py core.py
 RUN rm webui-macos-env.sh webui-user.bat webui-user.sh webui.bat webui.sh webui.py screenshot.png CODEOWNERS README.md environment-wsl2.yaml
-RUN apt install -y wget
 RUN wget -O misc.py https://pastebin.com/raw/1AKZ9kGy \
   && mv misc.py /usr/local/lib/python3.10/dist-packages/basicsr/utils/misc.py
 
-CMD python3 -u core.py --opt-sdp-no-mem-attention ${CLI_ARGS}
+CMD test -z "${APT_ARGS}" || apt-get -y install ${APT_ARGS} \
+    && test -z "${PIP_ARGS}" || pip install ${PIP_ARGS} \
+    && python3 -u core.py ${CLI_ARGS}
