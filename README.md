@@ -41,7 +41,7 @@ services:
   a1111:
     container_name: sd-a1111
     # Image (a1111 or comfy)
-    image: ghcr.io/thirdscam/stable-diffusion-webui-a1111:latest
+    image: ghcr.io/thirdscam/sd-webui-docker-a1111:latest
     # Ports (Default == 7890)
     # Ports follow the following rules: "External:Internal(Docker Container)"
     # You can change port number without change CLI_ARGS,
@@ -76,7 +76,7 @@ version: '3.9'
 services:
   a1111:
     container_name: sd-a1111
-    image: ghcr.io/thirdscam/stable-diffusion-webui-a1111:latest
+    image: ghcr.io/thirdscam/sd-webui-docker-a1111:latest
     ports:
       - "7890:7890"
     # Volumes
