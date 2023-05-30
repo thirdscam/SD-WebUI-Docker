@@ -29,6 +29,26 @@ cd SD-WebUI-Docker
 cp examples/docker-compose.comfy.yml docker-compose.yml
 docker compose up -d
 ```
+#### Update
+```sh
+# In WorkDir
+docker compose down
+docker compose pull
+docker compose up -d
+```
+#### On Podman
+```sh
+# Install
+git clone https://github.com/thirdscam/SD-WebUI-Docker.git
+cd SD-WebUI-Docker
+cp examples/docker-compose.a1111.yml docker-compose.yml # or docker-compose.comfy.yml
+podman-compose up -d
+
+# Update
+podman-compose down
+podman-compose pull
+podman-compose up -d
+```
 
 By default, The model and configuration files are stored in `./data` and the results are stored in the `./output` folder.
 
