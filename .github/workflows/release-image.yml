@@ -14,10 +14,10 @@ jobs:
         include:
           - dockerfile: ./a1111/Dockerfile
             context: ./a1111
-            image: ghcr.io/thirdscam/stable-diffusion-webui-a1111
+            image: ghcr.io/thirdscam/sd-webui-docker-a1111
           - dockerfile: ./comfy/Dockerfile
             context: ./comfy
-            image: ghcr.io/thirdscam/stable-diffusion-webui-comfy
+            image: ghcr.io/thirdscam/sd-webui-docker-comfy
     permissions:
       packages: write
       contents: read
