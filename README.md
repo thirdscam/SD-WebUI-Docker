@@ -11,7 +11,8 @@ Originally https://github.com/AbdBarho/stable-diffusion-webui-docker
 - Supports latest A1111, Comfy
 - Prebuilt Images
 - Using latest `torch`
-- (A1111 Only) Replace `xformers` to `opt-sdp-no-mem-attention(torch >= 2.0.0)`
+- (A1111 Only) Replace `xformers` to `opt-sdp-no-mem-attention(torch >= 2.0.0)` (Default)
+- apt, pip Packages can be installed (see Compose Setting Guide)
 
 ## Usage
 #### A1111
@@ -50,11 +51,33 @@ services:
       - "7890:7890"
     # Volumes
     volumes:
+    # Volumes follow the following rules: "External:Internal(Docker Container)"
+    # see https://docs.docker.com/compose/compose-file/compose-file-v3/#volumes
       - ./data:/data
       - ./output:/output
     stop_signal: SIGINT
     environment:
-      - CLI_ARGS=--listen --port 7890 --enable-insecure-extension-access --api --theme=dark --no-half-vae
+      # CLI_ARGS: Command Line Arguments.
+      # https://github.com/AUTOMATIC1111/stable-diffusion-webui/wiki/Command-Line-Arguments-and-Settings
+      # If you want, you can add other Command Line Arguments by referring to the link above.
+
+      # By default, it runs through `--opt-sdp-no-mem-attention` without using xformers.
+      # If you want, you can run it through xformers by deleting `--opt-sdp-no-mem-attention` and inserting `--xformers`.
+      - CLI_ARGS=--listen --port 7890 --enable-insecure-extension-access --api --theme=dark --no-half-vae --opt-sdp-no-mem-attention
+
+      # APT_ARGS, PIP_ARGS: This is where you write the apt and pip packages to install.
+      # Install some package if you want.
+      - APT_ARGS=
+      # ex) APT_ARGS=package1 package2 ...
+      # equals apt-get install -y package1 package2 ...
+      - PIP_ARGS=
+      # ex) PIP_ARGS=package1 package2 ...
+      # equals pip install package1 package2 ...
+
+      # Tip: If you want to do "pip install -U SomePackage", you can do "-U SomePackage" on the PIP_ARGS.
+      # Like This: PIP_ARGS=-U SomePackage
+      # Same at "--user SomePackage"
+      # PIP_ARGS=--user SomePackage
     deploy:
       resources:
         reservations:
