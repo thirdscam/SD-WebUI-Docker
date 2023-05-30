@@ -14,18 +14,18 @@ Originally https://github.com/AbdBarho/stable-diffusion-webui-docker
 - (A1111 Only) Replace `xformers` to `opt-sdp-no-mem-attention(torch >= 2.0.0)`
 
 ## Usage
-#### Comfy
-```sh
-git clone https://github.com/thirdscam/SD-WebUI-Docker.git
-cd SD-WebUI-Docker
-cp examples/docker-compose.comfy.yml docker-compose.yml
-docker compose up -d
-```
 #### A1111
 ```sh
 git clone https://github.com/thirdscam/SD-WebUI-Docker.git
 cd SD-WebUI-Docker
 cp examples/docker-compose.a1111.yml docker-compose.yml
+docker compose up -d
+```
+#### Comfy
+```sh
+git clone https://github.com/thirdscam/SD-WebUI-Docker.git
+cd SD-WebUI-Docker
+cp examples/docker-compose.comfy.yml docker-compose.yml
 docker compose up -d
 ```
 
