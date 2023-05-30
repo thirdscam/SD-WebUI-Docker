@@ -16,15 +16,15 @@ Originally https://github.com/AbdBarho/stable-diffusion-webui-docker
 ## Usage
 #### Comfy
 ```sh
-git clone https://github.com/thirdscam/stable-diffusion-webui-docker.git
-cd stable-diffusion-webui-docker
+git clone https://github.com/thirdscam/sd-webui-docker.git
+cd sd-webui-docker
 cp examples/docker-compose.comfy.yml docker-compose.yml
 docker compose up -d
 ```
 #### A1111
 ```sh
-git clone https://github.com/thirdscam/stable-diffusion-webui-docker.git
-cd stable-diffusion-webui-docker
+git clone https://github.com/thirdscam/sd-webui-docker.git
+cd sd-webui-docker
 cp examples/docker-compose.a1111.yml docker-compose.yml
 docker compose up -d
 ```
