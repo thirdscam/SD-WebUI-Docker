@@ -55,4 +55,5 @@ RUN rm webui-macos-env.sh webui-user.bat webui-user.sh webui.bat webui.sh webui.
 
 CMD test -z "${APT_ARGS}" || apt-get -y install ${APT_ARGS} \
     && test -z "${PIP_ARGS}" || pip install ${PIP_ARGS} \
+    && find /data/config/auto/extensions -type f -name 'requirements.txt' -exec pip install -q -r '{}' \; \
     && python3 -u core.py ${CLI_ARGS}
