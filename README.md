@@ -13,6 +13,7 @@ Originally https://github.com/AbdBarho/stable-diffusion-webui-docker
 - Using latest `torch`
 - (A1111 Only) Replace `xformers` to `opt-sdp-no-mem-attention(torch >= 2.0.0)` (Default)
 - apt, pip Packages can be installed (see Compose Setting Guide)
+- Auto-installs the requirements.txt included in the extension
 
 ## Usage
 #### A1111
