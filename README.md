@@ -21,20 +21,19 @@ Originally https://github.com/AbdBarho/stable-diffusion-webui-docker
 git clone https://github.com/thirdscam/SD-WebUI-Docker.git
 cd SD-WebUI-Docker
 cp examples/docker-compose.a1111.yml docker-compose.yml
-docker compose up -d
+docker compose up -d --build
 ```
 #### Comfy
 ```sh
 git clone https://github.com/thirdscam/SD-WebUI-Docker.git
 cd SD-WebUI-Docker
 cp examples/docker-compose.comfy.yml docker-compose.yml
-docker compose up -d
+docker compose up -d --build
 ```
 #### Update
 ```sh
 # In WorkDir
-docker compose down
-docker compose pull
+docker compose build --no-cache
 docker compose up -d
 ```
 #### On Podman
@@ -43,11 +42,10 @@ docker compose up -d
 git clone https://github.com/thirdscam/SD-WebUI-Docker.git
 cd SD-WebUI-Docker
 cp examples/docker-compose.a1111.yml docker-compose.yml # or docker-compose.comfy.yml
-podman-compose up -d
+podman-compose up -d --build
 
 # Update
-podman-compose down
-podman-compose pull
+podman-compose build --no-cache
 podman-compose up -d
 ```
 
