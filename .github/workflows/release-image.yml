@@ -7,7 +7,7 @@ on:
 jobs:
   push_to_registries:
     name: Publish image
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     strategy:
       fail-fast: false
       matrix:
