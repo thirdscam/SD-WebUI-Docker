@@ -1,15 +1,9 @@
 <h1 align="center">SD WebUI Docker</h1>
-<p align="center">
-  <a href="https://github.com/thirdscam/stable-diffusion-webui-docker/actions">
-    <img alt="Build Status" src="https://github.com/thirdscam/stable-diffusion-webui-docker/actions/workflows/release-image.yml/badge.svg">
-  </a>
-</p>
 
 Originally https://github.com/AbdBarho/stable-diffusion-webui-docker
 
 ## Features
 - Supports latest A1111, Comfy
-- Prebuilt Images
 - Using latest `torch`
 - (A1111 Only) Replace `xformers` to `opt-sdp-no-mem-attention(torch >= 2.0.0)` (Default)
 - apt, pip Packages can be installed (see Compose Setting Guide)
