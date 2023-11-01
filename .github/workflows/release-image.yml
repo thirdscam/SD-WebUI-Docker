@@ -3,14 +3,11 @@ name: Release image
 on:
   release:
     types: [published]
-  push:
-    branches:
-      - main
 
 jobs:
   push_to_registries:
     name: Publish image
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
     strategy:
       fail-fast: false
       matrix:
