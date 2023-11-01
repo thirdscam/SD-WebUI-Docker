@@ -47,6 +47,14 @@ jobs:
       with:
         images: ${{ matrix.image }}
 
+    - name: Free disk space
+      run: |
+        sudo swapoff -a
+        sudo rm -f /swapfile
+        sudo apt clean
+        docker rmi $(docker image ls -aq)
+        df -h
+
     - name: Build and push
       uses: docker/build-push-action@v2
       with:
