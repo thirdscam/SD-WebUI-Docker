@@ -20,6 +20,7 @@ RUN git clone https://github.com/AUTOMATIC1111/stable-diffusion-webui.git .
 RUN mkdir repositories
 RUN git clone https://github.com/CompVis/taming-transformers.git repositories/taming-transformers
 RUN git clone https://github.com/Stability-AI/stablediffusion.git repositories/stable-diffusion-stability-ai
+RUN git clone https://github.com/Stability-AI/generative-models.git repositories/generative-models
 RUN git clone https://github.com/sczhou/CodeFormer.git repositories/CodeFormer
 RUN git clone https://github.com/salesforce/BLIP.git repositories/BLIP
 RUN git clone https://github.com/crowsonkb/k-diffusion.git repositories/k-diffusion
