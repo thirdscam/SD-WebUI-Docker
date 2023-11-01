@@ -1,8 +1,8 @@
-FROM nvidia/cuda:11.8.0-cudnn8-devel-ubuntu22.04
+FROM nvidia/cuda:12.1.0-cudnn8-devel-ubuntu22.04
 
 ENV DEBIAN_FRONTEND=noninteractive
 ENV PIP_PREFER_BINARY=1
-ENV ROOT=/apt
+ENV ROOT=/app
 
 RUN mkdir ${ROOT}
 WORKDIR ${ROOT}
@@ -31,11 +31,11 @@ RUN mkdir interrogate && cp repositories/clip-interrogator/clip_interrogator/dat
 
 # Install Essential Packages (PIP)
 RUN --mount=type=cache,target=/root/.cache/pip \
-  pip install torch torchvision --index-url https://download.pytorch.org/whl/cu118 && \
+  pip install torch torchvision && \
   pip install -r requirements_versions.txt && \
   pip install -r repositories/CodeFormer/requirements.txt && \
   pip install --pre xformers && \
-  pip install triton pyngrok scikit-learn send2trash mediapipe ultralytics opencv-python-headless dynamicprompts[attentiongrabber,magicprompt] \
+  pip install triton pyngrok dctorch scikit-learn send2trash mediapipe ultralytics opencv-python-headless dynamicprompts[attentiongrabber,magicprompt] \
   git+https://github.com/TencentARC/GFPGAN.git \
   git+https://github.com/openai/CLIP.git \
   git+https://github.com/mlfoundations/open_clip.git
