@@ -52,7 +52,7 @@ jobs:
         sudo swapoff -a
         sudo rm -f /swapfile
         sudo apt clean
-        docker rmi $(docker image ls -aq)
+        docker 2>/dev/null 1>&2 rmi `docker images -aq` || true
         df -h
 
     - name: Build and push
